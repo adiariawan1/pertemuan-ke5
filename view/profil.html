@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreTax</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom scrollbar untuk sidebar jika isinya banyak */
+        .sidebar-scroll {
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: #4a5568 #2d3748; /* thumb and track */
+        }
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .sidebar-scroll::-webkit-scrollbar-track {
+            background: #2d3748; /* bg-gray-800 */
+        }
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background-color: #4a5568; /* bg-gray-600 */
+            border-radius: 20px;
+            border: 2px solid #2d3748;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <div class="flex h-screen bg-slate-500">
+
+        <div class="fixed top-0 left-0 h-full w-64 bg-blue-800 text-gray-100 shadow-lg p-5 flex flex-col z-30
+                    transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
+            
+            <div class="text-2xl font-bold text-center mb-10 mt-2">
+                <h1 class="font-semibold text-white hover: cursor-pointer" onclick="onlcikButton('../index.html')">CoreTax</h1>
+            </div>
+
+            <nav class="flex-grow sidebar-scroll">
+                <ul>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-slate-500 hover:text-white transition-colors duration-200 active-link" onclick="showContent('dashboard')">
+                            <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-slate-500 hover:text-white transition-colors duration-200" onclick="showContent('profile')">
+                            <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                            Profil
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-slate-500 hover:text-white transition-colors duration-200" onclick="showContent('account')">
+                            <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0h4"></path></svg>
+                            Akun
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-slate-500 hover:text-white transition-colors duration-200" onclick="showContent('matakuliah')">
+                            <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.206 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.794 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.794 5 16.5 5c1.706 0 3.332.477 4.5 1.253v13C19.832 18.477 18.206 18 16.5 18s-3.332.477-4.5 1.253"></path></svg>
+                            Mata Kuliah
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-slate-500 hover:text-white transition-colors duration-200" onclick="showContent('sks')">
+                            <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M3 21h18a2 2 0 002-2V5a2 2 0 00-2-2H3a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            Sisa SKS
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-3 rounded-lg text-gray-300 hover:bg-slate-500 hover:text-white transition-colors duration-200" onclick="showContent('settings')">
+                            <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Pengaturan
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="mt-auto">
+                <a href="#" class="flex items-center p-3 rounded-lg text-red-300 hover:bg-gray-700 hover:text-red-500 transition-colors duration-200">
+                    <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    Logout
+                </a>
+            </div>
+        </div>
+
+        <div class="lg:hidden fixed top-0 left-0 p-4 z-40">
+            <button id="sidebarToggle" class="text-gray-800 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="flex-1 flex flex-col overflow-hidden lg:ml-64">
+            <header class="flex justify-between items-center p-6 bg-white border-b-2 border-gray-200 shadow-md">
+                <h1 class="text-3xl font-semibold text-gray-800">
+                    <span id="pageTitle" class="capitalize">Dashboard</span>
+                </h1>
+                <div class="flex items-center">
+                    <span class="mr-4 text-gray-600">Halo, Nama Mahasiswa!</span>
+                    <img src="https://via.placeholder.com/40" alt="Avatar" class="h-10 w-10 rounded-full object-cover border-2 border-indigo-400" onclick="">
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                
+                <div id="dashboard" class="content-section">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Mahasiswa</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Informasi Pembayaran</h3>
+                            <p class="text-gray-600 text-sm mb-4">Status: <span class="font-bold text-green-600">Lunas</span></p>
+                            <p class="text-gray-600 text-sm mb-4">Jatuh Tempo Berikutnya: <span class="font-bold text-red-500">25 Desember 2024</span></p>
+                            <p class="text-gray-600 text-sm">Jumlah Tagihan: <span class="font-bold">Rp 3.500.000</span></p>
+                            <button class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none">Lihat Detail</button>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Indeks Prestasi Kumulatif (IPK)</h3>
+                            <p class="text-gray-600 text-5xl font-extrabold text-center text-indigo-600">3.75</p>
+                            <p class="text-gray-600 text-sm mt-4 text-center">Semester Terakhir: 3.80</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Pengumuman Terbaru</h3>
+                            <ul class="list-disc list-inside text-gray-600 text-sm">
+                                <li class="mb-2">Jadwal UTS semester genap telah dirilis.</li>
+                                <li class="mb-2">Batas akhir pengisian KRS adalah 10 Januari 2025.</li>
+                                <li>Beasiswa Peningkatan Prestasi dibuka!</li>
+                            </ul>
+                            <a href="#" class="text-indigo-500 hover:underline mt-4 block">Lihat Semua Pengumuman</a>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4">Aktivitas Terbaru</h3>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="py-3 flex justify-between items-center">
+                                <span class="text-gray-700">Mengambil mata kuliah: Algoritma dan Struktur Data</span>
+                                <span class="text-gray-500 text-sm">2 jam yang lalu</span>
+                            </li>
+                            <li class="py-3 flex justify-between items-center">
+                                <span class="text-gray-700">Melihat nilai UAS mata kuliah Basis Data</span>
+                                <span class="text-gray-500 text-sm">Kemarin</span>
+                            </li>
+                            <li class="py-3 flex justify-between items-center">
+                                <span class="text-gray-700">Melakukan pembayaran SPP semester ganjil</span>
+                                <span class="text-gray-500 text-sm">3 hari yang lalu</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="profile" class="content-section hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Profil Mahasiswa</h2>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-6">
+                            <img src="https://via.placeholder.com/100" alt="Foto Profil" class="h-24 w-24 rounded-full object-cover mr-6 border-4 border-indigo-400">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">Nama Lengkap Mahasiswa</h3>
+                                <p class="text-gray-600">NIM: 123456789</p>
+                                <p class="text-gray-600">Program Studi: Teknik Informatika</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-gray-700 font-medium">Tanggal Lahir:</p>
+                                <p class="text-gray-600 mb-2">01 Januari 2000</p>
+                                <p class="text-gray-700 font-medium">Alamat:</p>
+                                <p class="text-gray-600 mb-2">Jl. Contoh No. 123, Kota Contoh, Provinsi Contoh</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-700 font-medium">Email:</p>
+                                <p class="text-gray-600 mb-2">nama.mahasiswa@kampus.ac.id</p>
+                                <p class="text-gray-700 font-medium">Nomor Telepon:</p>
+                                <p class="text-gray-600 mb-2">0812-3456-7890</p>
+                            </div>
+                        </div>
+                        <button class="mt-6 px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none">Edit Profil</button>
+                    </div>
+                </div>
+
+                <div id="account" class="content-section hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Pengaturan Akun</h2>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <form>
+                            <div class="mb-4">
+                                <label for="currentPassword" class="block text-gray-700 text-sm font-bold mb-2">Password Lama:</label>
+                                <input type="password" id="currentPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Password Lama">
+                            </div>
+                            <div class="mb-4">
+                                <label for="newPassword" class="block text-gray-700 text-sm font-bold mb-2">Password Baru:</label>
+                                <input type="password" id="newPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Password Baru">
+                            </div>
+                            <div class="mb-6">
+                                <label for="confirmPassword" class="block text-gray-700 text-sm font-bold mb-2">Konfirmasi Password Baru:</label>
+                                <input type="password" id="confirmPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Konfirmasi Password Baru">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <button type="submit" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                    Simpan Perubahan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="matakuliah" class="content-section hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Daftar Mata Kuliah</h2>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kode</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mata Kuliah</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SKS</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nilai</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Semester</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">IF101</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Algoritma dan Struktur Data</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">3</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-semibold">A</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">1</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">IF102</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Basis Data</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">3</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 font-semibold">A-</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">2</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">IF201</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">Pemrograman Web</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">4</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-600 font-semibold">B+</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">3</td>
+                                    </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sks" class="content-section hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Informasi Sisa SKS</h2>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-gray-700 text-lg mb-4">Total SKS yang Harus Ditempuh: <span class="font-bold text-indigo-600">144 SKS</span></p>
+                        <p class="text-gray-700 text-lg mb-4">Total SKS yang Sudah Ditempuh: <span class="font-bold text-green-600">90 SKS</span></p>
+                        <p class="text-gray-700 text-xl mb-4">Sisa SKS yang Perlu Ditempuh: <span class="font-bold text-red-600">54 SKS</span></p>
+                        
+                        <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+                            <div class="bg-indigo-500 h-4 rounded-full" style="width: 62.5%;"></div> </div>
+                        <p class="text-gray-600 text-sm text-center">Progress SKS: 62.5%</p>
+                    </div>
+                </div>
+
+                <div id="settings" class="content-section hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Pengaturan Umum</h2>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="mb-4">
+                            <label for="theme" class="block text-gray-700 text-sm font-bold mb-2">Tema Aplikasi:</label>
+                            <select id="theme" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="light">Terang (Default)</option>
+                                <option value="dark">Gelap (Coming Soon)</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="notifications" class="block text-gray-700 text-sm font-bold mb-2">Notifikasi Email:</label>
+                            <input type="checkbox" id="notifications" class="mr-2 leading-tight">
+                            <span class="text-sm text-gray-700">Kirim notifikasi ke email saya</span>
+                        </div>
+                        <button class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none">Simpan Pengaturan</button>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+    <script src="../utils/button.js"></script>
+
+    <script>
+        // Fungsi untuk menampilkan/menyembunyikan konten dan mengupdate judul
+        function showContent(id) {
+            // Sembunyikan semua section konten
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            // Tampilkan section yang dipilih
+            document.getElementById(id).classList.remove('hidden');
+
+            // Update judul halaman di header
+            document.getElementById('pageTitle').textContent = id;
+
+            // Atur class 'active-link' pada navigasi sidebar
+            document.querySelectorAll('#sidebar nav ul li a').forEach(link => {
+                link.classList.remove('active-link', 'bg-gray-700', 'text-white');
+                link.classList.add('text-gray-300', 'hover:bg-gray-700', 'hover:text-white');
+            });
+            const activeLink = document.querySelector(`#sidebar nav ul li a[onclick="showContent('${id}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active-link', 'bg-gray-700', 'text-white');
+                activeLink.classList.remove('text-gray-300', 'hover:bg-gray-700', 'hover:text-white');
+            }
+
+            // Untuk mobile: sembunyikan sidebar setelah klik
+            if (window.innerWidth < 1024) { // 1024px adalah breakpoint 'lg' di Tailwind
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
+        }
+
+        // Event listener untuk tombol hamburger di mobile
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+        });
+
+        // Set Dashboard sebagai konten default saat halaman pertama dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            showContent('dashboard');
+        });
+    </script>
+</body>
+</html>
